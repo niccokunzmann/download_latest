@@ -21,6 +21,10 @@ permalink: /404.html
           }
           return null;
       }
+      
+      function get_asset_name() {
+          return document.location.pathname.split("/")[2];
+      }
       function request_latest_release(github_repository) {
           var httpreq = new XMLHttpRequest();
           httpreq.open("GET", "https://api.github.com/repos/" + github_repository + "/releases/latest", true);
@@ -40,6 +44,17 @@ permalink: /404.html
       }
       function redirect_to_release_file(release) {
           console.log(release);
+          var asset_name = get_asset_name();
+          console.log("Looking for asset: " + asset_name)
+          for (var i; i < release.assets.length; i+=1) {
+              var asset = release.assets[i];
+              if (asset.name == asset_name) {
+                  download_asset(asset)
+              }
+          }
+      }
+      function download_asset(asset) {
+          document.location = asset.browser_download_url;
       }
       var repository = get_repository();
       if (repository != null) {
