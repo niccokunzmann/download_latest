@@ -2,4 +2,36 @@
 permalink: /404.html
 ---
 
-404
+<html>
+  <head>
+    <script type="text/javascript">
+      function get_repository() {
+
+      }
+      function request_latest_release(github_repository) {
+          var httpreq = new XMLHttpRequest();
+          httpreq.open("GET", "https://api.github.com/repos/" + github_repository + "/releases/latest", true);
+          httpreq.onload = function(e) {
+              if (httpreq.readyState === 4) {
+                  if (httpreq.status === 200) {
+                    redirect_to_release_file(JSON.parse(httpreq.responseText));
+                  } else {
+                      console.error(httpreq.statusText);
+                  }
+              }
+          }
+          httpreq.onerror = function(e) {
+              console.error(httpreq.statusText);
+          }
+          httpreq.send(null);
+      }
+      function redirect_to_release_file(release) {
+          console.log(release);
+      }
+      var repository=get_repository();
+      request_latest_release(repository);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
