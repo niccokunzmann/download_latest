@@ -5,8 +5,9 @@ Download files from the latest release.
 
 Test this as
 
-- [direct link](https://niccokunzmann.github.io/download_latest/test.txt)
-- [indirect link](https://niccokunzmann.github.io/download_latest/)
+- direct link: https://niccokunzmann.github.io/download_latest/test.txt
+- indirect link: https://niccokunzmann.github.io/download_latest/
+- release: https://github.com/niccokunzmann/download_latest/releases/latest
 
 How To Use
 ----------
