@@ -46,15 +46,23 @@ permalink: /404.html
           console.log(release);
           var asset_name = get_asset_name();
           console.log("Looking for asset: " + asset_name)
-          for (var i; i < release.assets.length; i+=1) {
+          var downloaded = false;
+          for (var i = 0; i < release.assets.length; i+=1) {
               var asset = release.assets[i];
               if (asset.name == asset_name) {
-                  download_asset(asset)
+                  download_asset(asset);
+                  downloaded = true;
               }
+          }
+          if (!downloaded) {
+              could_not_download_asset(release);
           }
       }
       function download_asset(asset) {
           document.location = asset.browser_download_url;
+      }
+      function could_not_download_asset(release) {
+          console.log("Could not download asset from release.")
       }
       var repository = get_repository();
       if (repository != null) {
