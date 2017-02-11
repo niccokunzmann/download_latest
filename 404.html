@@ -6,7 +6,20 @@ permalink: /404.html
   <head>
     <script type="text/javascript">
       function get_repository() {
-
+          var split_url = document.referrer.split("//", 2)[1].split("/", 3);
+          var domain = split_url[0];
+          var user = split_url[1];
+          var repository = split_url[2];
+          if (domain == "github.com") {
+              return user + "/" + repository;
+          } else if (domain.endswith(".github.io")) {
+              var repository = user;
+              var user = domain.slice(0, domain.length - 10);
+              return user + "/" + repository;
+          } else {
+              console.error("TODO: what to do when the repository can not be determined?")
+          }
+          return null;
       }
       function request_latest_release(github_repository) {
           var httpreq = new XMLHttpRequest();
@@ -14,7 +27,7 @@ permalink: /404.html
           httpreq.onload = function(e) {
               if (httpreq.readyState === 4) {
                   if (httpreq.status === 200) {
-                    redirect_to_release_file(JSON.parse(httpreq.responseText));
+                      redirect_to_release_file(JSON.parse(httpreq.responseText));
                   } else {
                       console.error(httpreq.statusText);
                   }
@@ -28,10 +41,14 @@ permalink: /404.html
       function redirect_to_release_file(release) {
           console.log(release);
       }
-      var repository=get_repository();
-      request_latest_release(repository);
+      var repository = get_repository();
+      if (repository != null) {
+          request_latest_release(repository);
+      }
     </script>
   </head>
   <body>
+      Erm.. Obviously I could not redirect to the repository.<br/>
+      You may want to tell the people you came from.
   </body>
 </html>
