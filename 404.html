@@ -5,69 +5,16 @@ permalink: /404.html
 <html>
   <head>
     <script type="text/javascript">
-      function get_repository() {
-          var split_url = document.referrer.split("//", 2)[1].split("/", 3);
-          var domain = split_url[0];
-          var user = split_url[1];
-          var repository = split_url[2];
-          if (domain == "github.com") {
-              return user + "/" + repository;
-          } else if (domain.endswith(".github.io")) {
-              var repository = user;
-              var user = domain.slice(0, domain.length - 10);
-              return user + "/" + repository;
-          } else {
-              console.error("TODO: what to do when the repository can not be determined?")
-          }
-          return null;
-      }
+
+      /* ----------- common.js ----------*/
+      {% include common.js %}
+      /* ----------- github.js ----------*/
+      {% include github.js %}
+      /* ----------- gitlab.js ----------*/
+      {% include gitlab.js %}
+      /* ----------- 404.html ----------*/
+      downloadFrom(document.referrer);
       
-      function get_asset_name() {
-          return document.location.pathname.split("/")[2];
-      }
-      function request_latest_release(github_repository) {
-          var httpreq = new XMLHttpRequest();
-          httpreq.open("GET", "https://api.github.com/repos/" + github_repository + "/releases/latest", true);
-          httpreq.onload = function(e) {
-              if (httpreq.readyState === 4) {
-                  if (httpreq.status === 200) {
-                      redirect_to_release_file(JSON.parse(httpreq.responseText));
-                  } else {
-                      console.error(httpreq.statusText);
-                  }
-              }
-          }
-          httpreq.onerror = function(e) {
-              console.error(httpreq.statusText);
-          }
-          httpreq.send(null);
-      }
-      function redirect_to_release_file(release) {
-          console.log(release);
-          var asset_name = get_asset_name();
-          console.log("Looking for asset: " + asset_name)
-          var downloaded = false;
-          for (var i = 0; i < release.assets.length; i+=1) {
-              var asset = release.assets[i];
-              if (asset.name == asset_name) {
-                  download_asset(asset);
-                  downloaded = true;
-              }
-          }
-          if (!downloaded) {
-              could_not_download_asset(release);
-          }
-      }
-      function download_asset(asset) {
-          document.location = asset.browser_download_url;
-      }
-      function could_not_download_asset(release) {
-          console.log("Could not download asset from release.")
-      }
-      var repository = get_repository();
-      if (repository != null) {
-          request_latest_release(repository);
-      }
     </script>
   </head>
   <body>
