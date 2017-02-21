@@ -61,7 +61,7 @@ function httpRequest(url, onSuccess, onError) {
       onError(httpreq);
     }
   } else {
-    httpreq.onerror = function() {
+    httpreq.onerror = onError = function() {
       console.error(httpreq.statusText);
     }
   }
