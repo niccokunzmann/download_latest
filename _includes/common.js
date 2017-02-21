@@ -1,4 +1,6 @@
 
+/* --- Interface functions --- */
+
 function downloadAsset(asset) {
   document.location = asset;
 }
@@ -6,6 +8,8 @@ function downloadAsset(asset) {
 function couldNotDownloadAsset() {
   console.log("Could not download asset from release.")
 }
+
+/* --- Initialization --- */
 
 function parseRepository(referrer) {
   var split_url = referrer.split("//", 2)[1].split("/", 3);
@@ -34,4 +38,32 @@ function downloadFrom(website) {
   } else {
     couldNotDownloadAsset();
   }
+}
+
+/* --- helper functions --- */
+
+// onSuccess and onError are called with the XMLHttpRequest as first argument
+function httpRequest(url, onSuccess, onError) {
+  var httpreq = new XMLHttpRequest();
+  var repository = this;
+  httpreq.open("GET", url, true);
+  httpreq.onload = function(e) {
+    if (httpreq.readyState === 4) {
+      if (httpreq.status === 200) {
+        onSuccess(httpreq);
+      } else {
+        onError(httpreq);
+      }
+    }
+  }
+  if (onError) {
+    httpreq.onerror = function(e) {
+      onError(httpreq);
+    }
+  } else {
+    httpreq.onerror = function() {
+      console.error(httpreq.statusText);
+    }
+  }
+  httpreq.send(null);
 }

@@ -29,20 +29,11 @@ GithubRepository.prototype.redirectToReleaseFile = function(release) {
 }
 
 GithubRepository.prototype.startDownload = function () {
-  var httpreq = new XMLHttpRequest();
+  var url = "https://api.github.com/repos/" + this.githubRepository + "/releases/latest";
   var repository = this;
-  httpreq.open("GET", "https://api.github.com/repos/" + this.githubRepository + "/releases/latest", true);
-  httpreq.onload = function(e) {
-    if (httpreq.readyState === 4) {
-      if (httpreq.status === 200) {
-        repository.redirectToReleaseFile(JSON.parse(httpreq.responseText));
-      } else {
-        console.error(httpreq.statusText);
-      }
-    }
-  }
-  httpreq.onerror = function(e) {
-    console.error(httpreq.statusText);
-  }
-  httpreq.send(null);
+  httpRequest(url, function(httpreq) {
+    repository.redirectToReleaseFile(JSON.parse(httpreq.responseText));
+  });
 }
+
+
