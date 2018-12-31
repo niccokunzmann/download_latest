@@ -4,22 +4,25 @@ permalink: /404.html
 
 <html>
   <head>
+    <title>Downloading ...</title>
+  </head>
+  <body>
+    <p id="status">Enable JavaScript to download the file.</p>
+    <p>
+      If this does not work, you may want to tell the people of the site which you came from.<br/>
+      If you do not like this page, <a href="https://github.com/niccokunzmann/download_latest/blob/master/404.html#L74">change it</a>.
+    </p>
     <script type="text/javascript">
-
       /* ----------- common.js ----------*/
       {% include common.js %}
+      setStatus("Error on this page: Cannot download.")
       /* ----------- github.js ----------*/
       {% include github.js %}
       /* ----------- gitlab.js ----------*/
       {% include gitlab.js %}
       /* ----------- 404.html ----------*/
-      downloadFrom(document.referrer);
-      
+      startDownload();
+      setStatus("Downloading file ...");
     </script>
-  </head>
-  <body>
-      Trying download...<br/>
-      If this does not work, you may want to tell the people of the site which you came from.<br/>
-      If you do not like this page, <a href="https://github.com/niccokunzmann/download_latest/blob/master/404.html#L74">change it</a>.
   </body>
 </html>

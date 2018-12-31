@@ -3,10 +3,17 @@
 
 function downloadAsset(asset) {
   document.location = asset;
+  setStatus("Download started.")
 }
   
-function couldNotDownloadAsset() {
-  console.log("Could not download asset from release.")
+function couldNotDownloadAsset(text) {
+  console.log("Could not download asset from release.");
+  setStatus("Failed to download file" + (text ? ": " + text : "."));
+}
+
+function setStatus(text) {
+  var status = document.getElementById("status");
+  status.innerText = text;
 }
 
 /* --- Initialization --- */
@@ -27,17 +34,36 @@ function parseRepository(referrer) {
     return new GithubRepository(user, repository);
   } else {
     console.error("TODO: what to do when the repository can not be determined?")
+    couldNotDownloadAsset("Repository could not be determied.");
   }
   return null;
 }
 
 function downloadFrom(website) {
   if (website) {
-    var repository = parseRepository(website);
-    repository.startDownload();
+  } else {
+    GithubRepository()
+  }
+}
+
+function startDownload() {
+  var path = document.location.pathname.split("/").slice(1);
+  /* We have these cases:
+   * https://niccokunzmann.github.io/file.txt
+   * https://niccokunzmann.github.io/download_latest/file.txt
+   * https://niccokunzmann.github.io/ORG/REPO/file.txt
+   * https://niccokunzmann.github.io/download_latest/ORG/REPO/file.txt
+   */
+  var repository;
+  if (path.length >= 3) {
+    repository = new GithubRepository(path[path.length - 3], path[path.length - 2])
+  } else if (document.referrer) {
+    repository = parseRepository(website);
   } else {
     couldNotDownloadAsset();
+    return;
   }
+  repository.startDownload();
 }
 
 /* --- helper functions --- */
