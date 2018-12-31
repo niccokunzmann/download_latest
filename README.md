@@ -15,8 +15,10 @@ How To Use
 In your markdown files in the repository or in your github pages, add a link:
 
     https://niccokunzmann.github.io/download_latest/<FILE>
+    https://niccokunzmann.github.io/download_latest/<USER>/<REPOSITORY>/<FILE>
 
 Replace `<FILE>` with the name of the file to download from the releases.
+If you want to specify repository and user, you can do so.
 
 Contribute
 ----------
