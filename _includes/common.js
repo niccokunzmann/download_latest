@@ -3,7 +3,8 @@
 
 function downloadAsset(asset) {
   document.location = asset;
-  setStatus("Download started.")
+  setStatus("Download started.");
+  setTimeout(window.close, 1000);
 }
   
 function couldNotDownloadAsset(text) {
