@@ -39,13 +39,6 @@ function parseRepository(referrer) {
   return null;
 }
 
-function downloadFrom(website) {
-  if (website) {
-  } else {
-    GithubRepository()
-  }
-}
-
 function startDownload() {
   var path = document.location.pathname.split("/").slice(1);
   /* We have these cases:
@@ -58,7 +51,7 @@ function startDownload() {
   if (path.length >= 3) {
     repository = new GithubRepository(path[path.length - 3], path[path.length - 2])
   } else if (document.referrer) {
-    repository = parseRepository(website);
+    repository = parseRepository(document.referrer);
   } else {
     couldNotDownloadAsset();
     return;
