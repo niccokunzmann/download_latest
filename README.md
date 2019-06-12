@@ -42,7 +42,8 @@ I have implemented it this way: `?index=0..n`
 #### See it in action:
 
     https://chlegou.github.io/download_latest/chlegou/bitbot/ // will automatically bind the first file in the latest release
-    https://chlegou.github.io/download_latest/chlegou/bitbot/?index=5 // will download the 5th file in the latest release 
+    https://chlegou.github.io/download_latest/chlegou/bitbot/?index=0 // will download the 1st file in the latest release 
+    https://chlegou.github.io/download_latest/chlegou/bitbot/?index=5 // will download the 6th file in the latest release 
     
 **IMPORTANT:** In case of multi files, you must take consideration of file's orders in releases (they must follow the same order always to have it working right).
 
