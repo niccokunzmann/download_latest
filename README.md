@@ -65,4 +65,4 @@ This was creates as an answer to [this Stackoveflow question](http://stackoverfl
 Credits
 -------
 
-Work be [niccokunzmann](https://github.com/niccokunzmann) and [chlegou](https://github.com/chlegou).
+Work by [niccokunzmann](https://github.com/niccokunzmann) and [chlegou](https://github.com/chlegou).
