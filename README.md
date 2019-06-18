@@ -1,10 +1,3 @@
-Credits
-===============
-
-This project was was originally developed by **@niccokunzmann**.
-
-[https://github.com/niccokunzmann/download_latest](https://github.com/niccokunzmann/download_latest)
-
 download_latest
 ===============
 
