@@ -36,8 +36,8 @@ Ad the query parameter to the url like this: `?index=0..n`
  - If the index parameter is set, the file name is ignored.
 
 ```
-https://chlegou.github.io/download_latest/chlegou/bitbot/?index=0 // will download the 1st file in the latest release 
-https://chlegou.github.io/download_latest/chlegou/bitbot/?index=5 // will download the 6th file in the latest release 
+https://niccokunzmann.github.io/download_latest/chlegou/bitbot/?index=0 // will download the 1st file in the latest release 
+https://niccokunzmann.github.io/download_latest/chlegou/bitbot/?index=5 // will download the 6th file in the latest release 
 ```
 
 **IMPORTANT:** In case of multiple files, you must take consideration of the files' order in the releases.
